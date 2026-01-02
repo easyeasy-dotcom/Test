@@ -445,7 +445,7 @@
 
         async function init() {
             await loadVisits();
-            await logVisit();  // Logs every visit
+            await logVisit();
 
             setDefaultDate();
             updateWelcomeMessage();
@@ -734,46 +734,20 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Login Activity',
+                        label: 'Activity',
                         data: data,
                         backgroundColor: data.map(val => val === 1 ? 'rgba(118, 75, 162, 0.8)' : 'rgba(200, 200, 200, 0.3)'),
                         borderColor: data.map(val => val === 1 ? '#764ba2' : '#ccc'),
-                        borderWidth: 2,
+                        borderWidth: 1,
                         borderRadius: 5
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeInOutQuart'
-                    },
                     plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: {
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            }
-                        },
-                        title: {
-                            display: !hasAnyData,
-                            text: 'No login data available',
-                            font: { size: 15, weight: 'bold' }
-                        },
+                        legend: { display: false },
                         tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            padding: 12,
-                            titleFont: {
-                                size: 14
-                            },
-                            bodyFont: {
-                                size: 13
-                            },
                             callbacks: {
                                 label: function(context) {
                                     return context.parsed.y === 1 ? '✓ Logged in' : '✗ No login';
@@ -786,28 +760,15 @@
                             beginAtZero: true,
                             max: 1,
                             ticks: {
-                                stepSize: 1,
                                 callback: function(value) {
                                     return value === 1 ? '✓' : '✗';
-                                },
-                                font: {
-                                    size: 14
                                 }
-                            },
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
                             }
                         },
                         x: {
                             ticks: {
-                                font: {
-                                    size: 10
-                                },
                                 maxRotation: 45,
                                 minRotation: 45
-                            },
-                            grid: {
-                                display: false
                             }
                         }
                     }
