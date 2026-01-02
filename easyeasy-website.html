@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyEasy - AI-Powered Smoking Reduction Filters</title>
+    <meta name="description" content="Advanced AI chipset technology for gradual smoking reduction. Shop our 40 and 90 day filter sets.">
+    <meta property="og:title" content="EasyEasy - AI-Powered Smoking Reduction Filters">
+    <meta property="og:description" content="Advanced AI chipset technology for gradual smoking reduction">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+            font-size: 14px;
+            border-left: 1px solid #e0e0e0;
+            padding-left: 30px;
+        }
+
+        .lang-switcher span {
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .lang-switcher span.active {
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        .lang-switcher span:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #2563eb;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #fff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .btn-success {
+            background: #16a34a;
+        }
+
+        .btn-success:hover {
+            background: #15803d;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-alt {
+            background: #f9fafb;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .product-card {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 400px;
+            background: #f5f5f5;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .product-card .price {
+            font-size: 24px;
+            margin: 15px 0;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .product-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #16a34a;
+            color: #fff;
+            font-size: 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* How It Works */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #2563eb;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            max-width: 900px;
+            margin: 50px auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table th {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checkmark {
+            color: #16a34a;
+            font-size: 20px;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: #f9fafb;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .testimonial-card .stars {
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .testimonial-card p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #000;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 25px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .faq-question:hover {
+            color: #2563eb;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #666;
+            line-height: 1.8;
+            padding-top: 0;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding-top: 15px;
+        }
+
+        .faq-toggle {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+
+        .faq-toggle.active {
+            transform: rotate(45deg);
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .trust-badge {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .trust-badge-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .trust-badge p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Newsletter */
+        .newsletter-box {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 40px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .newsletter-box h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .contact-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .contact-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .contact-card a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 18px;
+            line-height: 2;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: #f5f5f5;
+            padding: 40px 50px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        footer p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Page Toggle */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                border-bottom: 1px solid #e0e0e0;
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .lang-switcher {
+                border-left: none;
+                border-top: 1px solid #e0e0e0;
+                padding-left: 0;
+                padding-top: 15px;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .comparison-table {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">EASYEASY</div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a onclick="showPage('home')" data-en="HOME" data-tc="首頁" data-sc="首页">HOME</a>
+            <a onclick="showPage('shop')" data-en="SHOP" data-tc="商店" data-sc="商店">SHOP</a>
+            <a onclick="showPage('about')" data-en="ABOUT US" data-tc="關於我們" data-sc="关于我们">ABOUT US</a>
+            <a onclick="showPage('contact')" data-en="CONTACT" data-tc="聯絡我們" data-sc="联络我们">CONTACT</a>
+            <div class="lang-switcher">
+                <span class="active" onclick="switchLanguage('en')">EN</span>
+                <span>|</span>
+                <span onclick="switchLanguage('tc')">繁</span>
+                <span>|</span>
+                <span onclick="switchLanguage('sc')">简</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1 data-en="Take Control of Your Journey" data-tc="掌控您的旅程" data-sc="掌控您的旅程">Take Control of Your Journey</h1>
+                <p data-en="AI-Powered Smoking Reduction Filters" data-tc="AI 智能吸煙減量過濾器" data-sc="AI 智能吸烟减量过滤器">AI-Powered Smoking Reduction Filters</p>
+                <p data-en="Advanced AI chipset technology for a healthier lifestyle" data-tc="先進的 AI 芯片技術，邁向更健康的生活方式" data-sc="先进的 AI 芯片技术，迈向更健康的生活方式" style="font-size: 16px; margin-top: 10px;">Advanced AI chipset technology for a healthier lifestyle</p>
+                <div style="margin-top: 30px;">
+                    <a href="#" class="btn" onclick="showPage('shop')" data-en="SHOP NOW" data-tc="立即購買" data-sc="立即购买">SHOP NOW</a>
+                    <a href="#" class="btn btn-secondary" onclick="scrollToSection('how-it-works')" data-en="LEARN MORE" data-tc="了解更多" data-sc="了解更多">LEARN MORE</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trust Badges -->
+        <section style="padding: 40px 50px;">
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">🔒</div>
+                    <p data-en="Secure Payment" data-tc="安全付款" data-sc="安全付款">Secure Payment</p>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">🚚</div>
+                    <p data-en="Free Shipping $99+" data-tc="$99+ 免運費" data-sc="$99+ 免运费">Free Shipping $99+</p>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">✓</div>
+                    <p data-en="30-Day Guarantee" data-tc="30天保證" data-sc="30天保证">30-Day Guarantee</p>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">⭐</div>
+                    <p data-en="AI Technology" data-tc="AI 技術" data-sc="AI 技术">AI Technology</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section-alt">
+            <h2 data-en="Why Choose EasyEasy?" data-tc="為什麼選擇 EasyEasy？" data-sc="为什么选择 EasyEasy？">Why Choose EasyEasy?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 data-en="AI Chipset Technology" data-tc="AI 芯片技術" data-sc="AI 芯片技术">AI Chipset Technology</h3>
+                    <p data-en="Advanced smart chipset that adapts to your smoking habits and provides intelligent reduction support" data-tc="先進的智能芯片適應您的吸煙習慣，提供智能減量支持" data-sc="先进的智能芯片适应您的吸烟习惯，提供智能减量支持">Advanced smart chipset that adapts to your smoking habits and provides intelligent reduction support</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 data-en="Track Your Progress" data-tc="追蹤您的進度" data-sc="追踪您的进度">Track Your Progress</h3>
+                    <p data-en="Data-driven insights help you monitor your reduction journey with real-time feedback" data-tc="數據驅動的見解幫助您通過實時反饋監控減量旅程" data-sc="数据驱动的见解帮助您通过实时反馈监控减量旅程">Data-driven insights help you monitor your reduction journey with real-time feedback</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 data-en="Gradual Reduction" data-tc="逐步減量" data-sc="逐步减量">Gradual Reduction</h3>
+                    <p data-en="Scientifically designed for gradual reduction, making your journey sustainable and achievable" data-tc="科學設計的漸進式減量，使您的旅程可持續且可實現" data-sc="科学设计的渐进式减量，使您的旅程可持续且可实现">Scientifically designed for gradual reduction, making your journey sustainable and achievable</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3 data-en="Premium Quality" data-tc="優質品質" data-sc="优质品质">Premium Quality</h3>
+                    <p data-en="High-quality materials and construction ensure durability and effectiveness throughout your journey" data-tc="高品質材料和結構確保整個旅程的耐用性和有效性" data-sc="高品质材料和结构确保整个旅程的耐用性和有效性">High-quality materials and construction ensure durability and effectiveness throughout your journey</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works">
+            <h2 data-en="How It Works" data-tc="如何運作" data-sc="如何运作">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 data-en="Choose Your Set" data-tc="選擇您的套裝" data-sc="选择您的套装">Choose Your Set</h3>
+                    <p data-en="Select 40 or 90 day supply based on your goals" data-tc="根據您的目標選擇40或90天供應" data-sc="根据您的目标选择40或90天供应">Select 40 or 90 day supply based on your goals</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 data-en="Attach Filter" data-tc="安裝過濾器" data-sc="安装过滤器">Attach Filter</h3>
+                    <p data-en="Simply attach the AI filter to your cigarette" data-tc="只需將 AI 過濾器連接到您的香煙" data-sc="只需将 AI 过滤器连接到您的香烟">Simply attach the AI filter to your cigarette</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 data-en="AI Adapts" data-tc="AI 適應" data-sc="AI 适应">AI Adapts</h3>
+                    <p data-en="Smart chipset learns and adjusts to your habits" data-tc="智能芯片學習並適應您的習慣" data-sc="智能芯片学习并适应您的习惯">Smart chipset learns and adjusts to your habits</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 data-en="Track Results" data-tc="追蹤結果" data-sc="追踪结果">Track Results</h3>
+                    <p data-en="Monitor your progress toward healthier habits" data-tc="監控您朝著更健康習慣的進度" data-sc="监控您朝着更健康习惯的进度">Monitor your progress toward healthier habits</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="section-alt">
+            <h2 data-en="Our Products" data-tc="我們的產品" data-sc="我们的产品">Our Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1599459182200-98bb6f57288b?w=800&q=80" alt="40 Days Set">
+                    </div>
+                    <h3 data-en="40 Days Smoking Reduction Set" data-tc="40天吸煙減量套裝" data-sc="40天吸烟减量套装">40 Days Smoking Reduction Set</h3>
+                    <p class="price" data-en="$38 USD" data-tc="$300 HKD" data-sc="¥300 HKD">$38 USD</p>
+                    <p data-en="AI-powered filter with smart chipset technology for gradual smoking reduction" data-tc="配備智能芯片技術的 AI 過濾器，逐步減少吸煙" data-sc="配备智能芯片技术的 AI 过滤器，逐步减少吸烟">AI-powered filter with smart chipset technology for gradual smoking reduction</p>
+                    <a href="#" class="btn" onclick="showPage('shop')" data-en="LEARN MORE" data-tc="了解更多" data-sc="了解更多">LEARN MORE</a>
+                </div>
+
+                <div class="product-card">
+                    <span class="badge" data-en="MOST POPULAR" data-tc="最受歡迎" data-sc="最受欢迎">MOST POPULAR</span>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1527838832700-5059252407fa?w=800&q=80" alt="90 Days Set">
+                    </div>
+                    <h3 data-en="90 Days Smoking Reduction Set" data-tc="90天吸煙減量套裝" data-sc="90天吸烟减量套装">90 Days Smoking Reduction Set</h3>
+                    <p class="price" data-en="$77 USD" data-tc="$600 HKD" data-sc="¥600 HKD">$77 USD</p>
+                    <p data-en="Complete AI-powered solution with advanced chipset for long-term smoking reduction" data-tc="配備先進芯片的完整 AI 解決方案，實現長期吸煙減量" data-sc="配备先进芯片的完整 AI 解决方案，实现长期吸烟减量">Complete AI-powered solution with advanced chipset for long-term smoking reduction</p>
+                    <a href="#" class="btn btn-success" onclick="showPage('shop')" data-en="LEARN MORE" data-tc="了解更多" data-sc="了解更多">LEARN MORE</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section>
+            <h2 data-en="Compare Plans" data-tc="比較方案" data-sc="比较方案">Compare Plans</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-en="Feature" data-tc="功能" data-sc="功能">Feature</th>
+                            <th data-en="40 Days Set" data-tc="40天套裝" data-sc="40天套装">40 Days Set</th>
+                            <th data-en="90 Days Set" data-tc="90天套裝" data-sc="90天套装">90 Days Set</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-en="AI Chipset Technology" data-tc="AI 芯片技術" data-sc="AI 芯片技术">AI Chipset Technology</td>
+                            <td><span class="checkmark">✓</span></td>
+                            <td><span class="checkmark">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td data-en="Progress Tracking" data-tc="進度追蹤" data-sc="进度追踪">Progress Tracking</td>
+                            <td><span class="checkmark">✓</span></td>
+                            <td><span class="checkmark">✓</span></td>
+                        </tr>
