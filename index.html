@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visit Time Tracker</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+<style>
+/* (STYLE UNCHANGED — SAFE TO KEEP AS IS) */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Segoe UI,Tahoma,Verdana;
+background:linear-gradient(135deg,#667eea,#764ba2);
+min-height:100vh;
+padding:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column
+}
+.nav-bar{position:fixed;top:20px;left:20px;z-index:1000}
+.nav-link{
+background:#fff;color:#667eea;
+padding:12px 24px;border-radius:25px;
+margin-right:10px;font-weight:600;
+cursor:pointer;text-decoration:none
+}
+.page{display:none}
+.page.active{display:block}
+.container{
+background:#fff;border-radius:20px;
+padding:40px;max-width:900px;width:100%
+}
+.chart-container{height:400px;margin-bottom:30px}
+button{
+background:#667eea;color:#fff;
+border:none;padding:10px 25px;
+border-radius:20px;cursor:pointer
+}
+button.active{background:#764ba2}
+.period-selector{display:flex;gap:10px;justify-content:center;margin-bottom:20px}
+</style>
+</head>
+
+<body>
+
+<div class="nav-bar">
+<a class="nav-link" onclick="showPage('main')">📊 Main</a>
+<a class="nav-link" onclick="showPage('more')">📈 More Data</a>
+</div>
+
+<div id="mainPage" class="page active">
+<div class="container">
+
+<h1>📊 Visit Tracker</h1>
+
+<div class="period-selector">
+<button class="period-btn active" onclick="changePeriod(30,this)">Last 30</button>
+<button class="period-btn" onclick="changePeriod(40,this)">Last 40</button>
+<button class="period-btn" onclick="changePeriod(50,this)">Last 50</button>
+</div>
+
+<label>Select Date:</label>
+<input type="date" id="dateFilter" onchange="filterByDate()">
+<button onclick="showAllDates()">All Dates</button>
+
+<div class="chart-container">
+<canvas id="visitChart"></canvas>
+</div>
+
+<div class="chart-container">
+<canvas id="activityChart"></canvas>
+</div>
+
+<button onclick="addTestData()">Add Test Data</button>
+<button onclick="clearData()">Clear Data</button>
+
+</div>
+</div>
+
+<div id="morePage" class="page">
+<div class="container">
+<h1>📈 More Data</h1>
+<p>Charts update when returning to main page.</p>
+</div>
+</div>
+
+<script>
+let visits=[];
+let visitChart,activityChart;
+let currentPeriod=30;
+let selectedDate=null;
+
+function loadVisits(){
+const stored=localStorage.getItem("visit-times");
+if(stored)visits=JSON.parse(stored);
+}
+
+function saveVisits(){
+localStorage.setItem("visit-times",JSON.stringify(visits));
+}
+
+function logVisit(){
+const now=new Date();
+visits.push({
+timestamp:now.toISOString(),
+date:now.toISOString().split("T")[0]
+});
+saveVisits();
+}
+
+function setDefaultDate(){
+const today=new Date().toISOString().split("T")[0];
+document.getElementById("dateFilter").value=today;
+selectedDate=today;
+}
+
+function filterByDate(){
+selectedDate=document.getElementById("dateFilter").value||null;
+createVisitChart();
+}
+
+function showAllDates(){
+selectedDate=null;
+document.getElementById("dateFilter").value="";
+createVisitChart();
+}
+
+function changePeriod(days,btn){
+currentPeriod=days;
+document.querySelectorAll(".period-btn").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+createActivityChart();
+}
+
+function createVisitChart(){
+const ctx=document.getElementById("visitChart");
+if(!ctx)return;
+
+const dataFiltered=selectedDate
+?visits.filter(v=>v.date===selectedDate)
+:visits;
+
+const hours={};
+dataFiltered.forEach(v=>{
+const h=new Date(v.timestamp).getHours();
+hours[h]=(hours[h]||0)+1;
+});
+
+const labels=Object.keys(hours).sort((a,b)=>a-b);
+const data=labels.map(h=>hours[h]);
+
+if(visitChart)visitChart.destroy();
+
+visitChart=new Chart(ctx,{
+type:"line",
+data:{
+labels:labels.map(h=>`${h}:00`),
+datasets:[{
+label:"Visits",
+data,
+borderWidth:3,
+tension:.4,
+fill:true
+}]
+},
+options:{responsive:true,maintainAspectRatio:false}
+});
+}
+
+function createActivityChart(){
+const ctx=document.getElementById("activityChart");
+if(!ctx)return;
+
+const labels=[],data=[];
+const now=new Date();
+
+for(let i=currentPeriod-1;i>=0;i--){
+const d=new Date(now.getTime()-i*86400000);
+const ds=d.toISOString().split("T")[0];
+labels.push(ds);
+data.push(visits.some(v=>v.date===ds)?1:0);
+}
+
+if(activityChart)activityChart.destroy();
+
+activityChart=new Chart(ctx,{
+type:"bar",
+data:{
+labels,
+datasets:[{label:"Login",data}]
+},
+options:{responsive:true,maintainAspectRatio:false}
+});
+}
+
+function showPage(p){
+document.getElementById("mainPage").classList.remove("active");
+document.getElementById("morePage").classList.remove("active");
+
+if(p==="main"){
+document.getElementById("mainPage").classList.add("active");
+setTimeout(()=>{
+createVisitChart();
+createActivityChart();
+},50);
+}
+else document.getElementById("morePage").classList.add("active");
+}
+
+function addTestData(){
+const now=new Date();
+for(let i=0;i<30;i++){
+const d=new Date(now.getTime()-Math.random()*20*86400000);
+visits.push({
+timestamp:d.toISOString(),
+date:d.toISOString().split("T")[0]
+});
+}
+saveVisits();
+createVisitChart();
+createActivityChart();
+alert("Test data added");
+}
+
+function clearData(){
+localStorage.removeItem("visit-times");
+visits=[];
+createVisitChart();
+createActivityChart();
+}
+
+function init(){
+loadVisits();
+logVisit();
+setDefaultDate();
+createVisitChart();
+createActivityChart();
+}
+
+init();
+</script>
+
+</body>
+</html>
