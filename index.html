@@ -445,8 +445,8 @@
 
         async function init() {
             await loadVisits();
-            await logVisit();
-            setDefaultDate(); // Fixed: now called correctly
+            await logVisit(); // Now logs EVERY visit
+            setDefaultDate();
             updateWelcomeMessage();
             updateStats();
             updateDetailedStats();
@@ -473,13 +473,10 @@
         }
 
         async function logVisit() {
-            const now = new Date();
-            const todayStr = now.toLocaleDateString();
-            // Only add one visit per day to avoid duplicates on refresh
-            if (!visits.some(v => v.date === todayStr)) {
+                const now = new Date();
                 visits.push({
                     timestamp: now.toISOString(),
-                    date: todayStr,
+                    date: now.toLocaleDateString(),
                     time: now.toLocaleTimeString()
                 });
                 await saveVisits();
